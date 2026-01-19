@@ -96,3 +96,13 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+# Cài đặt các thư viện cần thiết
+
+# Để kết nối NestJS với MongoDB một cách chuyên nghiệp và an toàn nhất, chúng ta thường sử dụng thư viện Mongoose.
+
+$ npm install @nestjs/mongoose mongoose
+
+# Cho phép sử dụng process.env cài thư viện
+
+$ npm install @nestjs/config
