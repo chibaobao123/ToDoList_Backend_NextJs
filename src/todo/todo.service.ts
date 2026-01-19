@@ -13,8 +13,11 @@ export class TodoService {
   }
 
   // Update mới
-  async updateTodo(data: any) {
-    return new this.todoModel(data).save();
+  async updateStatus(id: string, status: number) {
+    // { new: true } để Mongoose trả về đối tượng sau khi đã cập nhật
+    return this.todoModel
+      .findByIdAndUpdate(id, { status: status }, { new: true })
+      .exec();
   }
 
   // Lấy danh sách
