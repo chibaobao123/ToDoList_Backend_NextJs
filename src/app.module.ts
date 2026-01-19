@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { db } from '../database';
+import { TodoModule } from './todo/todo.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { db } from '../database';
       }),
       inject: [ConfigService],
     }),
+    TodoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

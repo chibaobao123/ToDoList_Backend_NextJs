@@ -106,3 +106,15 @@ $ npm install @nestjs/mongoose mongoose
 # Cho phép sử dụng process.env cài thư viện
 
 $ npm install @nestjs/config
+
+# Tạo module
+
+npx nest generate module todo
+
+# service
+
+npx nest generate service todo
+
+# Tạo controller
+
+npx nest generate controller todo
