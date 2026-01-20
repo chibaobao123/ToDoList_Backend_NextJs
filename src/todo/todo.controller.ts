@@ -18,9 +18,9 @@ export class TodoController {
     return this.todoService.create(body);
   }
 
-  @Patch(':id/status') // Đường dẫn: localhost:3001/todo/ID_CUA_BAN/status
-  updateStatus(@Param('id') id: string, @Body('status') status: number) {
-    return this.todoService.updateStatus(id, status);
+  @Patch()
+  updateStatus(@Body() body: any) {
+    return this.todoService.updateStatus(body);
   }
 
   @Get()
@@ -28,8 +28,13 @@ export class TodoController {
     return this.todoService.findAll();
   }
 
-  @Delete(':id') // Đường dẫn: localhost:3001/todo/ID_CUA_BAN
-  remove(@Param('id') id: string) {
-    return this.todoService.delete(id);
+  @Delete(':_id') // Đường dẫn: localhost:3001/todo/ID_CUA_BAN
+  delete(@Param('_id') _id: string) {
+    return this.todoService.delete(_id);
+  }
+
+  @Patch('remove-completed') // Đường dẫn: http://localhost:3001/todo/remove-completed
+  async removeCompleted() {
+    return this.todoService.removeAllCompleted();
   }
 }
