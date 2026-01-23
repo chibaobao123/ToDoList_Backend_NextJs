@@ -118,3 +118,9 @@ npx nest generate service todo
 # Tạo controller
 
 npx nest generate controller todo
+
+# Module jwt, passportjs, passport-jwt, bcrypt
+
+npm install @nestjs/jwt @nestjs/passport passport passport-jwt bcrypt
+
+npm install -D @types/passport-jwt @types/bcrypt

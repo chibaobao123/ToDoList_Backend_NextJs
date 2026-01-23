@@ -7,6 +7,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { db } from '../database';
 import { TodoModule } from './todo/todo.module';
+import { UsersModule } from './users/users.module';
+import { AuthService } from './auth/auth.service';
+import { AuthController } from './auth/auth.controller';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,8 +26,10 @@ import { TodoModule } from './todo/todo.module';
       inject: [ConfigService],
     }),
     TodoModule,
+    UsersModule,
+    AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, AuthController],
+  providers: [AppService, AuthService],
 })
 export class AppModule {}
