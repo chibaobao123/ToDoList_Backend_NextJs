@@ -31,4 +31,16 @@ export class UsersService {
   findByEmail(email: string): Promise<User | null> {
     return this.userModel.findOne({ email }).exec();
   }
+
+  async createGoogleUser(googleUser: {
+    email: string;
+    name: string;
+  }): Promise<User> {
+    const newUser = new this.userModel({
+      email: googleUser.email,
+      name: googleUser.name,
+      password: '', // Không cần mật khẩu cho user Google
+    });
+    return newUser.save();
+  }
 }

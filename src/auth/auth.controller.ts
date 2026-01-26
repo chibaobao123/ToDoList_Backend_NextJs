@@ -10,4 +10,9 @@ export class AuthController {
   async login(@Body() body: User) {
     return this.authService.validateUser(body);
   }
+
+  @Post('google') // POST: http://localhost:3001/auth/google
+  async googleAuth(@Body('token') token: string) {
+    return this.authService.validateGoogleUser(token);
+  }
 }
