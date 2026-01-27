@@ -22,7 +22,7 @@ export class TodoService {
 
   // Lấy danh sách
   async findAll() {
-    return this.todoModel.find().exec();
+    return this.todoModel.find({ active: true }).exec();
   }
 
   // Xóa
