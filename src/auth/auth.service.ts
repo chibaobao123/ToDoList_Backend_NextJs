@@ -1,8 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
-import { JwtPayload } from './interfaces/jwt-payload.interface';
-import { User } from '../users/users.schema';
+import { JwtPayload } from '../interfaces/jwt-payload.interface';
+import { User } from '../schemas/users.schema';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -21,6 +21,7 @@ export class AuthService {
       const payload: JwtPayload = {
         email: user.email,
         sub: user._id.toString(),
+        role: user.role,
       };
       return {
         access_token: this.jwtService.sign(payload), // Tạo token
@@ -63,6 +64,7 @@ export class AuthService {
     const payload: JwtPayload = {
       email: user.email,
       sub: user._id.toString(),
+      role: user.role,
     };
     return {
       access_token: this.jwtService.sign(payload),

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { TodoController } from './todo.controller';
-import { Todo, TodoSchema } from './todo.schema';
+import { Todo, TodoSchema } from '../schemas/todo.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({

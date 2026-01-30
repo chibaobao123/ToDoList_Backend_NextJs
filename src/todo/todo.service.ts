@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Todo } from './todo.schema';
+import { Todo } from '../schemas/todo.schema';
 
 @Injectable()
 export class TodoService {
@@ -37,5 +37,12 @@ export class TodoService {
   async removeAllCompleted() {
     // Tìm tất cả Todo có status là 1 và cập nhật active thành false
     return this.todoModel.updateMany({ status: 1 }, { active: false }).exec();
+  }
+
+  async findMyTodos(userId: string) {
+    return this.todoModel.find({
+      userId,
+      active: true,
+    });
   }
 }

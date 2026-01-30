@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose/dist/common/mongoose.decorators';
 import { Model } from 'mongoose';
-import { User } from './users.schema';
+import { User } from '../schemas/users.schema';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()

@@ -119,6 +119,10 @@ npx nest generate service todo
 
 npx nest generate controller todo
 
+# Middleware
+
+npx nest generate middleware todo
+
 # Module jwt, passportjs, passport-jwt, bcrypt
 
 npm install @nestjs/jwt @nestjs/passport passport passport-jwt bcrypt

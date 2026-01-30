@@ -6,7 +6,9 @@ import {
   Delete,
   Param,
   Patch,
+  Req,
 } from '@nestjs/common';
+import type { RequestWithUser } from '../interfaces/user.interface';
 import { TodoService } from './todo.service';
 
 @Controller('todo') // Đường dẫn API sẽ là: localhost:3001/todo
@@ -26,6 +28,11 @@ export class TodoController {
   @Get()
   findAll() {
     return this.todoService.findAll();
+  }
+
+  @Get()
+  findMyTodos(@Req() req: RequestWithUser) {
+    return this.todoService.findMyTodos(req.user.userId);
   }
 
   @Delete(':_id') // Đường dẫn: localhost:3001/todo/ID_CUA_BAN

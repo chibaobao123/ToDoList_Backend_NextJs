@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -11,6 +11,8 @@ import { UsersModule } from './users/users.module';
 import { AuthService } from './auth/auth.service';
 import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
+
+import { TodoMiddleware } from '././todo/todo.middleware';
 
 @Module({
   imports: [
@@ -32,4 +34,11 @@ import { AuthModule } from './auth/auth.module';
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(TodoMiddleware)
+      .exclude('/auth/login', '/uses/register') // các route KHÔNG cần token
+      .forRoutes('*'); // áp dụng cho toàn app
+  }
+}

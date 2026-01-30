@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { Post, Body } from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
-import { User } from './users.schema';
+import { User } from '../schemas/users.schema';
 import { UsersService } from './users.service';
 
 @Controller('users')
