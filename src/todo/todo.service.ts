@@ -8,8 +8,12 @@ export class TodoService {
   constructor(@InjectModel(Todo.name) private todoModel: Model<Todo>) {}
 
   // Thêm mới
-  async create(data: Todo) {
-    return new this.todoModel(data).save();
+  async create(data: Todo, userId: string) {
+    const todo = new this.todoModel({
+      ...data,
+      userId,
+    });
+    return todo.save();
   }
 
   // Update mới

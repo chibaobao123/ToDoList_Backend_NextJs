@@ -31,6 +31,7 @@ export class TodoMiddleware implements NestMiddleware {
       if (!secret) {
         throw new Error('KEY_SECRET is not defined');
       }
+
       const decoded = jwt.verify(token, secret);
 
       // gắn user vào request

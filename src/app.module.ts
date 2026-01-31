@@ -38,7 +38,7 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(TodoMiddleware)
-      .exclude('/auth/login', '/uses/register') // các route KHÔNG cần token
+      .exclude('/auth/login', '/uses/register', '/auth/google') // các route KHÔNG cần token
       .forRoutes('*'); // áp dụng cho toàn app
   }
 }

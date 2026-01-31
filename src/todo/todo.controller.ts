@@ -16,8 +16,8 @@ export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @Post()
-  create(@Body() body: any) {
-    return this.todoService.create(body);
+  create(@Body() body: any, @Req() req: RequestWithUser) {
+    return this.todoService.create(body, req.user.userId);
   }
 
   @Patch()
@@ -25,7 +25,7 @@ export class TodoController {
     return this.todoService.updateStatus(body);
   }
 
-  @Get()
+  @Get('/allTodo')
   findAll() {
     return this.todoService.findAll();
   }
