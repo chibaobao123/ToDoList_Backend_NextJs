@@ -1,18 +1,17 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core'; // Thêm APP_GUARD để thiết lập Guard toàn cục
 
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { db } from '../database';
 import { TodoModule } from './todo/todo.module';
 import { UsersModule } from './users/users.module';
-import { AuthService } from './auth/auth.service';
-import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 
-import { TodoMiddleware } from '././todo/todo.middleware';
+import { JwtAuthGuard } from './auth/jwt-auth.guard'; // Import Guard của bạn
 
 @Module({
   imports: [
@@ -31,14 +30,14 @@ import { TodoMiddleware } from '././todo/todo.middleware';
     UsersModule,
     AuthModule,
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService],
+  controllers: [AppController],
+  providers: [
+    AppService, // Đăng ký JwtAuthGuard làm Guard toàn cục
+    // Điều này giúp kiểm tra token cho bất kỳ link nào người dùng truy cập
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(TodoMiddleware)
-      .exclude('/auth/login', '/uses/register', '/auth/google') // các route KHÔNG cần token
-      .forRoutes('*'); // áp dụng cho toàn app
-  }
-}
+export class AppModule {}

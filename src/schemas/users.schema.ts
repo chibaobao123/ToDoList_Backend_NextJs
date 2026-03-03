@@ -5,19 +5,19 @@ import { Role } from '../roles/roles.enum';
 @Schema()
 export class User extends Document {
   @Prop({ required: true, unique: true })
-  email: string;
+  email!: string;
 
   @Prop()
-  name: string;
+  name!: string;
 
   @Prop()
-  password: string; // Lưu ý: Cần mã hóa trước khi lưu
+  password!: string; // Lưu ý: Cần mã hóa trước khi lưu
 
   @Prop({
     type: String,
     enum: Object.values(Role),
     default: Role.USER,
   })
-  role: Role;
+  role!: Role;
 }
 export const UserSchema = SchemaFactory.createForClass(User);

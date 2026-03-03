@@ -9,12 +9,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey:
-        configService.get<string>('KEY_SECRET') || 'FallBackSecretKey', // Phải trùng với secret trong AuthModule
+      ignoreExpiration: false, // Phải kiểm tra hết hạn
+      secretOrKey: configService.get<string>('KEY_SECRET')!, // Phải trùng với secret trong AuthModule
     });
   }
 
   validate(payload: JwtPayload) {
-    return { userId: payload.sub, email: payload.email, role: payload.role };
+    /**
+     * payload chính là object bạn sign khi login
+     * return gì → req.user = cái đó
+     */
+    return { email: payload.email, sub: payload.sub, role: payload.role };
   }
 }

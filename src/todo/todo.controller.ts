@@ -7,10 +7,16 @@ import {
   Param,
   Patch,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import type { RequestWithUser } from '../interfaces/user.interface';
 import { TodoService } from './todo.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles } from '../roles/roles.decorator';
+import { Role } from '../roles/roles.enum';
 
+@UseGuards(JwtAuthGuard)
 @Controller('todo') // Đường dẫn API sẽ là: localhost:3001/todo
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
@@ -25,6 +31,8 @@ export class TodoController {
     return this.todoService.updateStatus(body);
   }
 
+  @UseGuards(RolesGuard) // Chỉ cho phép admin truy cập
+  @Roles(Role.ADMIN)
   @Get('/allTodo')
   findAll() {
     return this.todoService.findAll();

@@ -72,4 +72,8 @@ export class AuthService {
       name: user.name,
     };
   }
+
+  getMe(jwtPayload: JwtPayload) {
+    return jwtPayload;
+  }
 }

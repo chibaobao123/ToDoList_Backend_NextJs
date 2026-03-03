@@ -11,7 +11,7 @@ export interface RequestWithUser extends Request {
 }
 
 @Injectable()
-export class TodoMiddleware implements NestMiddleware {
+export class AuthMiddleware implements NestMiddleware {
   use(req: RequestWithUser, res: Response, next: NextFunction) {
     const authHeader = req.headers.authorization;
 

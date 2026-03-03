@@ -128,3 +128,22 @@ npx nest generate middleware todo
 npm install @nestjs/jwt @nestjs/passport passport passport-jwt bcrypt
 
 npm install -D @types/passport-jwt @types/bcrypt
+
+
+# Production Flow:
+
+Client → Authorization: Bearer token
+        ↓
+JwtAuthGuard
+        ↓
+JwtStrategy.validate()
+        ↓
+req.user = payload
+        ↓
+@CurrentUser()
+        ↓
+AuthController.getMe()
+        ↓
+AuthService.getMe()
+        ↓
+Database
